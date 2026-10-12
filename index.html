@@ -5,996 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KVB Sarees – Tradition. Style. For Every You.</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    /* ════════════════════════════
-       TOKENS
-    ════════════════════════════ */
-    :root {
-      --maroon:    #1a5c2a;
-      --maroon2:   #236b33;
-      --maroon-lt: #2d8042;
-      --gold:      #b8860b;
-      --gold-lt:   #d4a843;
-      --cream:     #f4faf5;
-      --cream2:    #e8f5ec;
-      --white:     #ffffff;
-      --text:      #1a1a1a;
-      --text2:     #4a4a4a;
-      --text3:     #888;
-      --border:    #d0e8d8;
-      --shadow-sm: 0 2px 8px rgba(26,92,42,.08);
-      --shadow-md: 0 8px 32px rgba(26,92,42,.12);
-      --shadow-lg: 0 20px 60px rgba(26,92,42,.15);
-      --r:         6px;
-      --transition: all .28s cubic-bezier(.4,0,.2,1);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
-    img  { display: block; width: 100%; }
-    a    { text-decoration: none; color: inherit; }
-    ul   { list-style: none; }
-    button { cursor: pointer; font-family: inherit; }
-
-    /* ════════════════════════════
-       ANNOUNCEMENT BAR
-    ════════════════════════════ */
-    .ann-bar {
-      background: var(--maroon);
-      color: #fff;
-      text-align: center;
-      font-size: .78rem;
-      letter-spacing: .08em;
-      padding: .5rem 1rem;
-      font-weight: 500;
-    }
-    .ann-bar a { color: var(--gold-lt); margin-left: .4rem; border-bottom: 1px solid currentColor; }
-
-    /* ════════════════════════════
-       NAVBAR
-    ════════════════════════════ */
-    .navbar {
-      position: sticky; top: 0; z-index: 1000;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 0 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 72px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* Logo */
-    .logo { display: flex; align-items: center; gap: .6rem; }
-    .logo-img {
-      width: 58px; height: 58px;
-      object-fit: contain;
-      border-radius: 50%;
-      flex-shrink: 0;
-      filter: drop-shadow(0 2px 6px rgba(26,92,42,.25));
-      transition: transform .3s ease;
-    }
-    .logo:hover .logo-img { transform: scale(1.06) rotate(3deg); }
-    .logo-text { line-height: 1; }
-    .logo-kvb  { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: var(--maroon); letter-spacing: .04em; }
-    .logo-sarees { font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-
-    /* Nav links */
-    .nav-menu { display: flex; align-items: center; gap: 2.2rem; }
-    .nav-menu > li > a {
-      font-size: .88rem; font-weight: 500; color: var(--text2);
-      letter-spacing: .03em; padding: .35rem 0;
-      border-bottom: 2px solid transparent;
-      transition: var(--transition);
-    }
-    .nav-menu > li > a:hover,
-    .nav-menu > li > a.active { color: var(--maroon); border-bottom-color: var(--maroon); }
-
-    /* Dropdown */
-    .has-dropdown { position: relative; }
-    .has-dropdown > a::after { content: ' ▾'; font-size: .65rem; }
-    .dropdown {
-      position: absolute; top: calc(100% + 12px); left: 0;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: .6rem 0;
-      min-width: 190px;
-      box-shadow: var(--shadow-md);
-      opacity: 0; pointer-events: none;
-      transform: translateY(-8px);
-      transition: var(--transition);
-      z-index: 9999;
-    }
-    .has-dropdown:hover .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
-    .dropdown a { display: block; padding: .55rem 1.2rem; font-size: .86rem; color: var(--text2); transition: var(--transition); }
-    .dropdown a:hover { background: var(--cream); color: var(--maroon); padding-left: 1.5rem; }
-
-    /* Nav icons */
-    .nav-icons { display: flex; align-items: center; gap: 1.1rem; }
-    .nav-icon-btn {
-      position: relative; background: none; border: none;
-      font-size: 1.1rem; color: var(--text2);
-      width: 38px; height: 38px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      transition: var(--transition);
-    }
-    .nav-icon-btn:hover { background: var(--cream2); color: var(--maroon); }
-    .badge {
-      position: absolute; top: 4px; right: 4px;
-      background: var(--maroon); color: #fff;
-      font-size: .58rem; font-weight: 700;
-      width: 16px; height: 16px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    }
-
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; }
-    .hamburger span { width: 24px; height: 2px; background: var(--maroon); border-radius: 2px; transition: var(--transition); }
-
-    /* ════════════════════════════
-       HERO
-    ════════════════════════════ */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 580px;
-      background: var(--cream2);
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 5rem 5% 5rem 8%;
-      z-index: 1;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600; margin-bottom: 1.2rem;
-    }
-    .hero-eyebrow::before, .hero-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--gold-lt); width: 28px; }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 5vw, 4rem);
-      font-weight: 900; color: var(--maroon);
-      line-height: 1.1; letter-spacing: -.01em;
-    }
-    .hero h1 em { font-style: italic; color: var(--maroon2); }
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.55rem);
-      font-family: 'Playfair Display', serif;
-      font-weight: 400; color: var(--text2);
-      margin-top: .4rem;
-    }
-    .hero-rule {
-      width: 60px; height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
-      border-radius: 2px; margin: 1.4rem 0;
-    }
-    .hero-desc {
-      font-size: .97rem; color: var(--text2);
-      line-height: 1.75; max-width: 420px;
-      font-weight: 300;
-    }
-    .hero-btns { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
-
-    .btn-fill {
-      background: var(--maroon); color: #fff;
-      border: 2px solid var(--maroon);
-      padding: .8rem 2rem; border-radius: var(--r);
-      font-size: .9rem; font-weight: 600;
-      letter-spacing: .04em;
-      transition: var(--transition);
-      display: inline-flex; align-items: center; gap: .5rem;
-    }
-    .btn-fill:hover { background: var(--maroon2); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .btn-fill .arrow { transition: transform .25s; }
-    .btn-fill:hover .arrow { transform: translateX(4px); }
-
-    .btn-ghost {
-      background: transparent; color: var(--maroon);
-      border: 2px solid var(--maroon);
-      padding: .8rem 2rem; border-radius: var(--r);
-      font-size: .9rem; font-weight: 600;
-      letter-spacing: .04em;
-      transition: var(--transition);
-    }
-    .btn-ghost:hover { background: var(--maroon); color: #fff; transform: translateY(-2px); }
-
-    .hero-right {
-      position: relative; overflow: hidden;
-    }
-    .hero-right img {
-      height: 100%; object-fit: cover; object-position: top center;
-    }
-    .hero-right::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, var(--cream2) 0%, transparent 25%);
-      z-index: 1;
-    }
-
-    /* Floating badge */
-    .hero-badge {
-      position: absolute; bottom: 2.5rem; left: -1rem; z-index: 2;
-      background: var(--white);
-      border-left: 4px solid var(--gold);
-      border-radius: 0 var(--r) var(--r) 0;
-      padding: .9rem 1.4rem;
-      box-shadow: var(--shadow-md);
-      animation: float 3s ease-in-out infinite;
-    }
-    .hero-badge .num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--maroon); }
-    .hero-badge .lbl { font-size: .72rem; color: var(--text3); letter-spacing: .06em; margin-top: .1rem; }
-    @keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
-
-    /* ════════════════════════════
-       MARQUEE
-    ════════════════════════════ */
-    .marquee-strip {
-      background: var(--maroon);
-      padding: .65rem 0; overflow: hidden; white-space: nowrap;
-    }
-    .marquee-inner {
-      display: inline-block;
-      animation: marquee 30s linear infinite;
-      font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
-      color: rgba(255,255,255,.85); font-weight: 500;
-    }
-    .marquee-inner span { margin: 0 1.8rem; }
-    .marquee-inner .dot { color: var(--gold-lt); }
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ════════════════════════════
-       SECTION SHARED
-    ════════════════════════════ */
-    section { padding: 5rem 6%; }
-
-    .sec-head {
-      display: flex; align-items: baseline; justify-content: space-between;
-      margin-bottom: 2.4rem; flex-wrap: wrap; gap: .8rem;
-    }
-    .sec-head h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.7rem, 3.5vw, 2.2rem); font-weight: 700;
-      color: var(--maroon);
-    }
-    .sec-head h2 span { color: var(--gold); }
-    .view-all {
-      font-size: .84rem; font-weight: 600; color: var(--maroon);
-      letter-spacing: .05em; display: flex; align-items: center; gap: .3rem;
-      border-bottom: 1px solid transparent; transition: var(--transition);
-    }
-    .view-all:hover { border-bottom-color: var(--maroon); gap: .5rem; }
-
-    /* ════════════════════════════
-       COLLECTIONS
-    ════════════════════════════ */
-    .collections-bg { background: var(--white); }
-    .coll-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem;
-      max-width: 1200px; margin: 0 auto;
-    }
-    @media(max-width:900px){ .coll-grid{ grid-template-columns: repeat(2,1fr) !important; } }
-    @media(max-width:500px){ .coll-grid{ grid-template-columns: 1fr 1fr !important; } }
-
-    .coll-card {
-      position: relative; border-radius: var(--r); overflow: hidden;
-      aspect-ratio: 4/3; cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-    .coll-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .coll-card img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .5s ease;
-    }
-    .coll-card:hover img { transform: scale(1.06); }
-    .coll-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(26,92,42,.78) 100%);
-    }
-    .coll-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 1.2rem 1.4rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .coll-label span { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
-    .coll-arrow {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: rgba(0,0,0,.45); border: 1.5px solid rgba(255,255,255,.6);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: .9rem;
-      transition: var(--transition);
-    }
-    .coll-card:hover .coll-arrow { background: var(--gold-lt); border-color: var(--gold-lt); color: var(--maroon); transform: translateX(3px); }
-
-    /* ════════════════════════════
-       FEATURE STRIP
-    ════════════════════════════ */
-    .feat-strip {
-      background: var(--cream2);
-      padding: 2.5rem 6%;
-    }
-    .feat-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
-      max-width: 1100px; margin: 0 auto;
-    }
-    @media(max-width:700px){ .feat-grid{ grid-template-columns: repeat(2,1fr); } }
-    .feat-item {
-      display: flex; align-items: center; gap: .9rem;
-      background: var(--white); padding: 1.1rem 1.2rem;
-      border-radius: var(--r); border: 1px solid var(--border);
-      transition: var(--transition);
-    }
-    .feat-item:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .feat-icon { font-size: 1.6rem; flex-shrink: 0; }
-    .feat-item h4 { font-size: .85rem; font-weight: 600; color: var(--maroon); }
-    .feat-item p  { font-size: .75rem; color: var(--text3); margin-top: .15rem; }
-
-    /* ════════════════════════════
-       NEW ARRIVALS / PRODUCTS
-    ════════════════════════════ */
-    .arrivals-bg { background: var(--cream); }
-
-    .prod-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1.6rem;
-      max-width: 1200px; margin: 0 auto;
-    }
-    @media(max-width:1000px){ .prod-grid{ grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:560px)  { .prod-grid{ grid-template-columns: 1fr 1fr; gap:.9rem; } }
-
-    .prod-card {
-      background: var(--white); border-radius: var(--r);
-      overflow: hidden; border: 1px solid var(--border);
-      transition: var(--transition);
-      position: relative;
-    }
-    .prod-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-
-    .prod-img-wrap {
-      position: relative; aspect-ratio: 3/4; overflow: hidden;
-      background: var(--cream2);
-    }
-    .prod-img-wrap img { height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .prod-card:hover .prod-img-wrap img { transform: scale(1.05); }
-
-    /* Wishlist heart */
-    .heart-btn {
-      position: absolute; top: .8rem; right: .8rem;
-      width: 34px; height: 34px; border-radius: 50%;
-      background: rgba(255,255,255,.85);
-      border: none; font-size: 1rem; color: #555;
-      display: flex; align-items: center; justify-content: center;
-      transition: var(--transition);
-      backdrop-filter: blur(4px);
-      z-index: 2;
-    }
-    .heart-btn:hover,
-    .heart-btn.liked { color: #c62828; background: #fff; transform: scale(1.15); }
-
-    /* Badges */
-    .prod-badge {
-      position: absolute; top: .8rem; left: .8rem; z-index: 2;
-      background: var(--gold); color: var(--white);
-      font-size: .68rem; font-weight: 700; letter-spacing: .06em;
-      padding: .25rem .65rem; border-radius: 2px; text-transform: uppercase;
-    }
-    .prod-badge.new { background: var(--maroon); }
-
-    .prod-info { padding: 1rem 1.1rem 1.3rem; }
-    .prod-cat  { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: .3rem; }
-    .prod-name { font-family: 'Playfair Display', serif; font-size: .98rem; font-weight: 600; color: var(--text); line-height: 1.35; }
-    .prod-row  { display: flex; align-items: center; justify-content: space-between; margin-top: .9rem; }
-    .prod-price { font-size: 1.05rem; font-weight: 700; color: var(--maroon); }
-    .prod-mrp   { font-size: .78rem; color: var(--text3); text-decoration: line-through; margin-left: .35rem; font-weight: 400; }
-    .prod-view {
-      background: var(--maroon); color: #fff;
-      border: none; padding: .45rem 1.1rem;
-      border-radius: 4px; font-size: .8rem; font-weight: 600;
-      letter-spacing: .04em;
-      transition: var(--transition);
-    }
-    .prod-view:hover { background: var(--maroon2); transform: scale(1.04); }
-
-    /* ════════════════════════════
-       OFFER BANNER
-    ════════════════════════════ */
-    .offer-strip {
-      background: linear-gradient(135deg, var(--maroon) 0%, #2d8042 50%, var(--maroon) 100%);
-      padding: 3rem 6%;
-      display: flex; align-items: center; justify-content: space-evenly; flex-wrap: wrap; gap: 2rem;
-    }
-    .offer-left { display: flex; align-items: center; gap: 1.2rem; }
-    .offer-icon { font-size: 2.2rem; }
-    .offer-left h3 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: #fff; }
-    .offer-left p  { color: rgba(255,255,255,.7); font-size: .88rem; margin-top: .2rem; }
-
-    .offer-divider { width: 1px; height: 60px; background: rgba(255,255,255,.2); }
-    @media(max-width:700px){ .offer-divider{ display:none; } }
-
-    .offer-right { display: flex; align-items: center; gap: 1.2rem; }
-    .wa-btn {
-      display: inline-flex; align-items: center; gap: .7rem;
-      background: #25d366; color: #003d1a;
-      border: none; padding: .85rem 1.8rem;
-      border-radius: 40px; font-size: .92rem; font-weight: 700;
-      letter-spacing: .04em;
-      box-shadow: 0 4px 20px rgba(37,211,102,.35);
-      transition: var(--transition);
-    }
-    .wa-btn:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.45); }
-    .wa-icon { font-size: 1.3rem; }
-    .offer-right p { color: rgba(255,255,255,.65); font-size: .82rem; }
-
-    /* ════════════════════════════
-       TESTIMONIALS
-    ════════════════════════════ */
-    .testi-bg { background: var(--white); }
-    .testi-intro { text-align: center; margin-bottom: 3rem; }
-    .testi-intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem,3.5vw,2.2rem); font-weight: 700; color: var(--maroon); }
-    .testi-intro p  { color: var(--text2); font-size: .95rem; margin-top: .6rem; }
-
-    .testi-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.6rem;
-      max-width: 1100px; margin: 0 auto;
-    }
-    @media(max-width:760px){ .testi-grid{ grid-template-columns: 1fr; } }
-
-    .testi-card {
-      background: var(--cream); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 1.8rem;
-      position: relative; transition: var(--transition);
-    }
-    .testi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
-    .testi-card::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold-lt); position: absolute; top: .4rem; left: 1.2rem; line-height: 1; opacity: .5; }
-    .testi-stars { color: #f59e0b; font-size: .88rem; letter-spacing: .1em; margin-bottom: .9rem; }
-    .testi-text  { font-size: .9rem; color: var(--text2); line-height: 1.75; font-style: italic; }
-    .testi-author { display: flex; align-items: center; gap: .75rem; margin-top: 1.3rem; }
-    .testi-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--maroon); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .testi-name { font-weight: 600; color: var(--maroon); font-size: .88rem; }
-    .testi-loc  { font-size: .75rem; color: var(--text3); }
-
-    /* ════════════════════════════
-       INSTAGRAM / GALLERY TEASER
-    ════════════════════════════ */
-    .gallery-bg { background: var(--cream2); }
-    .gallery-intro { text-align: center; margin-bottom: 2.4rem; }
-    .gallery-intro h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--maroon); }
-    .gallery-intro p  { color: var(--text2); font-size: .9rem; margin-top: .5rem; }
-    .gallery-intro a  { color: var(--maroon); font-weight: 600; }
-
-    .gallery-grid {
-      display: grid; grid-template-columns: repeat(5,1fr); gap: .7rem;
-      max-width: 1200px; margin: 0 auto;
-    }
-    @media(max-width:700px){ .gallery-grid{ grid-template-columns: repeat(3,1fr); } }
-    @media(max-width:400px){ .gallery-grid{ grid-template-columns: repeat(2,1fr); } }
-
-    .gallery-item {
-      aspect-ratio: 1; border-radius: 4px; overflow: hidden; position: relative; cursor: pointer;
-    }
-    .gallery-item img { height: 100%; object-fit: cover; transition: transform .45s ease; }
-    .gallery-item:hover img { transform: scale(1.1); }
-    .gallery-item::after {
-      content: '📷';
-      position: absolute; inset: 0;
-      background: rgba(26,92,42,.5);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      opacity: 0; transition: opacity .3s;
-    }
-    .gallery-item:hover::after { opacity: 1; }
-
-    /* ════════════════════════════
-       FOOTER
-    ════════════════════════════ */
-    .footer {
-      background: var(--maroon);
-      padding: 4rem 6% 2rem;
-      color: rgba(255,255,255,.8);
-    }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1.2fr 1.4fr; gap: 3rem;
-      max-width: 1200px; margin: 0 auto 3rem;
-    }
-    @media(max-width:900px){ .footer-grid{ grid-template-columns: 1fr 1fr; gap: 2rem; } }
-    @media(max-width:560px){ .footer-grid{ grid-template-columns: 1fr; } }
-
-    .footer-brand .logo-kvb  { color: #fff; font-size: 2rem; }
-    .footer-brand .logo-sarees { color: var(--gold-lt); }
-    .footer-brand p { font-size: .88rem; line-height: 1.7; margin-top: 1rem; color: rgba(255,255,255,.65); max-width: 260px; }
-    .social-row { display: flex; gap: .7rem; margin-top: 1.4rem; }
-    .soc-btn {
-      width: 38px; height: 38px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.25);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: rgba(255,255,255,.7);
-      transition: var(--transition);
-    }
-    .soc-btn:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: var(--maroon); transform: translateY(-3px); }
-
-    .footer-col h4 { font-family: 'Playfair Display', serif; font-weight: 600; color: #fff; font-size: 1rem; margin-bottom: 1.2rem; letter-spacing: .04em; }
-    .footer-col ul { display: flex; flex-direction: column; gap: .65rem; }
-    .footer-col ul a { font-size: .86rem; color: rgba(255,255,255,.6); transition: var(--transition); }
-    .footer-col ul a:hover { color: var(--gold-lt); padding-left: .3rem; }
-
-    .contact-item { display: flex; gap: .7rem; margin-bottom: .9rem; align-items: flex-start; }
-    .contact-item .ci { font-size: 1rem; margin-top: .1rem; flex-shrink: 0; }
-    .contact-item .cd { font-size: .86rem; color: rgba(255,255,255,.6); line-height: 1.55; }
-    .contact-item .cd strong { color: rgba(255,255,255,.85); display: block; margin-bottom: .1rem; }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.12);
-      padding-top: 1.6rem; max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: .8rem;
-      font-size: .8rem; color: rgba(255,255,255,.4);
-    }
-    .footer-bottom a { color: rgba(255,255,255,.5); transition: var(--transition); }
-    .footer-bottom a:hover { color: var(--gold-lt); }
-    .footer-bottom-links { display: flex; gap: 1.5rem; }
-
-    /* ════════════════════════════
-       WHATSAPP FLOAT
-    ════════════════════════════ */
-    .wa-float {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
-      width: 54px; height: 54px; border-radius: 50%;
-      background: #25d366; color: #003d1a;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
-      box-shadow: 0 4px 20px rgba(37,211,102,.4);
-      transition: var(--transition);
-      animation: pulse 2.5s infinite;
-    }
-    .wa-float:hover { transform: scale(1.12); box-shadow: 0 8px 30px rgba(37,211,102,.55); }
-    @keyframes pulse { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)} 50%{box-shadow:0 4px 30px rgba(37,211,102,.7)} }
-
-    /* ════════════════════════════
-       SCROLL REVEAL
-    ════════════════════════════ */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
-    .reveal.up { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
-
-    /* ════════════════════════════
-       MOBILE NAV DRAWER
-    ════════════════════════════ */
-    .mobile-nav {
-      position: fixed; top: 0; right: -100%; bottom: 0;
-      width: min(320px,85vw);
-      background: var(--white); z-index: 2000;
-      padding: 2rem 1.5rem;
-      box-shadow: var(--shadow-lg);
-      transition: right .35s cubic-bezier(.4,0,.2,1);
-      overflow-y: auto;
-    }
-    .mobile-nav.open { right: 0; }
-    .mobile-nav-close {
-      background: none; border: none; font-size: 1.5rem;
-      color: var(--text2); float: right; cursor: pointer; margin-bottom: 2rem;
-    }
-    .mobile-nav ul { display: flex; flex-direction: column; gap: .2rem; margin-top: 3rem; }
-    .mobile-nav ul a { display: block; padding: .8rem .5rem; font-size: 1rem; font-weight: 500; color: var(--text); border-bottom: 1px solid var(--border); }
-    .overlay-bg {
-      position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 1999;
-      opacity: 0; pointer-events: none; transition: opacity .3s;
-      border: none; cursor: default; padding: 0;
-    }
-    .overlay-bg.show { opacity: 1; pointer-events: all; }
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-
-    /* ════════════════════════════
-       SEARCH OVERLAY
-    ════════════════════════════ */
-    .search-overlay {
-      position: fixed; inset: 0; z-index: 3000;
-      display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 12vh;
-      opacity: 0; pointer-events: none; transition: opacity .3s;
-    }
-    .search-overlay.show { opacity: 1; pointer-events: all; }
-    .search-backdrop {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,.6); border: none; cursor: default;
-    }
-    .search-box {
-      background: var(--white); border-radius: 8px; padding: 2rem;
-      width: min(640px,90vw); box-shadow: var(--shadow-lg);
-      transform: translateY(-20px); transition: transform .3s;
-      border: none; margin: 0;
-    }
-    .search-overlay.show .search-box { transform: none; }
-    .search-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--maroon); margin-bottom: 1rem; }
-    .search-input-wrap { display: flex; border: 2px solid var(--border); border-radius: var(--r); overflow: hidden; }
-    .search-input-wrap input { flex: 1; border: none; padding: .8rem 1rem; font-size: .95rem; outline: none; }
-    .search-input-wrap button { background: var(--maroon); color: #fff; border: none; padding: .8rem 1.3rem; font-size: 1rem; cursor: pointer; }
-    .search-close { float: right; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text3); }
-
-    /* ════════════════════════════
-       DIWALI SPECIAL
-    ════════════════════════════ */
-    .diwali-banner {
-      background: linear-gradient(135deg, #0a2e14 0%, #0d3d1a 40%, #0a2e14 100%);
-      padding: 3.5rem 6%;
-      position: relative; overflow: hidden;
-      text-align: center;
-    }
-    /* animated lamp lights */
-    .diwali-banner::before {
-      content: '🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔 🪔';
-      position: absolute; top: 0; left: 0; right: 0;
-      font-size: 1.1rem; letter-spacing: 1.2rem;
-      padding: .5rem 0;
-      background: rgba(0,0,0,.35);
-      white-space: nowrap; overflow: hidden;
-    }
-    .diwali-eyebrow {
-      display: inline-flex; align-items: center; gap: .6rem;
-      background: rgba(212,168,67,.15); border: 1px solid rgba(212,168,67,.4);
-      color: var(--gold-lt); font-size: .75rem; letter-spacing: .2em;
-      text-transform: uppercase; font-weight: 700;
-      padding: .35rem 1.2rem; border-radius: 20px;
-      margin-bottom: 1.2rem; margin-top: 1rem;
-    }
-    .diwali-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 900; color: #fff;
-      line-height: 1.1;
-    }
-    .diwali-title span { color: var(--gold-lt); }
-    .diwali-sub {
-      font-size: 1rem; color: rgba(255,255,255,.75);
-      margin: .9rem auto; max-width: 520px; line-height: 1.7;
-    }
-    .diwali-features {
-      display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem;
-      margin: 1.4rem 0;
-    }
-    .diwali-feat {
-      background: rgba(212,168,67,.15); border: 1px solid rgba(212,168,67,.35);
-      color: var(--gold-lt); padding: .4rem 1rem; border-radius: 20px;
-      font-size: .82rem; font-weight: 600; letter-spacing: .04em;
-    }
-    .diwali-price {
-      display: inline-block;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem; font-weight: 900;
-      color: var(--gold-lt);
-      margin: .5rem 0 1.5rem;
-    }
-    .diwali-price sup { font-size: 1.2rem; vertical-align: super; }
-
-    .diwali-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1.4rem;
-      max-width: 1200px; margin: 3rem auto 0;
-    }
-    @media(max-width:900px){ .diwali-grid{ grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:500px){ .diwali-grid{ grid-template-columns: 1fr 1fr; gap:.8rem; } }
-
-    .diwali-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(212,168,67,.25);
-      border-radius: var(--r); overflow: hidden;
-      transition: var(--transition);
-    }
-    .diwali-card:hover { transform: translateY(-6px); border-color: var(--gold-lt); box-shadow: 0 16px 48px rgba(212,168,67,.2); }
-    .diwali-card .prod-img-wrap { background: rgba(0,0,0,.3); }
-    .diwali-card .prod-info { background: rgba(255,255,255,.05); }
-    .diwali-card .prod-cat  { color: var(--gold-lt); }
-    .diwali-card .prod-name { color: #fff; }
-    .diwali-card .prod-price { color: var(--gold-lt); font-size: 1.2rem; }
-    .diwali-card .prod-mrp  { color: rgba(255,255,255,.4); }
-    .diwali-card .prod-view { background: var(--gold); color: #0a2e14; font-weight: 700; }
-    .diwali-card .prod-view:hover { background: var(--gold-lt); }
-
-    /* diwali featured product */
-    .diwali-featured { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; max-width:1000px; margin:2.5rem auto 0; }
-    @media(max-width:700px){ .diwali-featured { grid-template-columns:1fr; gap:1.5rem; } }
-    .diwali-feat-img { position:relative; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.4); }
-    .diwali-feat-img img { width:100%; display:block; aspect-ratio:3/4; object-fit:cover; }
-    .diwali-feat-badge { position:absolute; top:1rem; left:1rem; background:#c0392b; color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.08em; padding:.3rem .8rem; border-radius:4px; text-transform:uppercase; }
-    .diwali-feat-info { text-align:left; }
-    .diwali-feat-cat { color:var(--gold-lt); font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.5rem; }
-    .diwali-feat-name { color:#fff; font-size:1.9rem; font-weight:800; margin:0 0 .8rem; line-height:1.2; }
-    .diwali-feat-desc { color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.6; margin-bottom:1.2rem; }
-    .diwali-feat-highlights { list-style:none; padding:0; margin:0 0 1.5rem; display:flex; flex-direction:column; gap:.45rem; }
-    .diwali-feat-highlights li { color:rgba(255,255,255,.85); font-size:.88rem; }
-    .diwali-feat-price { display:flex; align-items:baseline; gap:.8rem; margin-bottom:1.5rem; }
-    .diwali-feat-curr { color:var(--gold-lt); font-size:2.2rem; font-weight:800; }
-    .diwali-feat-mrp { color:rgba(255,255,255,.4); font-size:1.1rem; text-decoration:line-through; }
-    .diwali-feat-off { background:#c0392b; color:#fff; font-size:.75rem; font-weight:700; padding:.2rem .6rem; border-radius:4px; }
-    .diwali-feat-btns { display:flex; gap:1rem; flex-wrap:wrap; }
-    .btn-wa { display:inline-flex; align-items:center; gap:.4rem; background:#25d366; color:#003d1a; font-weight:700; font-size:.9rem; padding:.75rem 1.4rem; border-radius:8px; text-decoration:none; transition:background .2s; }
-    .btn-wa:hover { background:#1ebe5d; }
-
-    /* colour swatches */
-    .colour-swatches { display: flex; gap: .4rem; margin-top: .6rem; }
-    .swatch {
-      width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.3); cursor: pointer;
-      transition: transform .2s;
-    }
-    .swatch:hover { transform: scale(1.25); border-color: var(--gold-lt); }
-
-    /* ════════════════════════════
-       UNIFORM SAREES
-    ════════════════════════════ */
-    .uniform-bg { background: var(--white); }
-    .uniform-banner {
-      background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon2) 100%);
-      border-radius: var(--r); padding: 2.5rem 2.5rem;
-      display: flex; align-items: center; gap: 2rem;
-      max-width: 1200px; margin: 0 auto 3rem; flex-wrap: wrap;
-      position: relative; overflow: hidden;
-    }
-    .uniform-banner::after {
-      content: '';
-      position: absolute; right: -40px; top: -40px;
-      width: 200px; height: 200px; border-radius: 50%;
-      background: rgba(255,255,255,.04);
-    }
-    .uniform-banner-text { flex: 1; min-width: 200px; }
-    .uniform-banner-text h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
-    .uniform-banner-text p  { color: rgba(255,255,255,.75); font-size: .9rem; margin-top: .4rem; line-height: 1.6; }
-    .uniform-price-tag {
-      background: var(--gold); color: #0a2e14;
-      padding: .8rem 1.6rem; border-radius: var(--r);
-      text-align: center; flex-shrink: 0;
-    }
-    .uniform-price-tag .from { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-    .uniform-price-tag .amt  { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; line-height: 1; }
-
-    .uniform-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1.4rem;
-      max-width: 1200px; margin: 0 auto;
-    }
-    @media(max-width:900px){ .uniform-grid{ grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:500px){ .uniform-grid{ grid-template-columns: 1fr 1fr; gap:.8rem; } }
-
-    .uniform-card {
-      border-radius: var(--r); overflow: hidden;
-      border: 1px solid var(--border); background: var(--white);
-      transition: var(--transition);
-    }
-    .uniform-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--maroon); }
-    .uniform-card .prod-img-wrap { aspect-ratio: 3/4; background: var(--cream2); }
-    .uniform-card .prod-info { padding: .9rem 1rem 1.1rem; }
-    .uniform-card .prod-cat  { color: var(--maroon); font-weight: 700; }
-    .uniform-card .prod-name { font-size: .93rem; }
-    .uniform-card .prod-price { color: var(--maroon); }
-    .uniform-bulk {
-      display: inline-block; margin-top: .5rem;
-      background: var(--cream2); color: var(--maroon);
-      font-size: .7rem; font-weight: 600; letter-spacing: .08em;
-      padding: .2rem .7rem; border-radius: 3px; text-transform: uppercase;
-    }
-
-    @media(max-width:860px){
-      .hamburger { display: flex; }
-      .nav-menu, .nav-icons { display: none; }
-    }
-    @media(min-width:861px){ .mobile-nav { display: none; } }
-
-    @media(max-width:760px){
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { height: 340px; }
-      .hero-left  { padding: 3rem 6%; }
-      .hero-badge { display: none; }
-    }
-
-    /* ════════════════════════════
-       CART DRAWER
-    ════════════════════════════ */
-    .cart-drawer {
-      position: fixed; top: 0; right: -100%; bottom: 0;
-      width: min(420px, 95vw);
-      background: var(--white); z-index: 2100;
-      display: flex; flex-direction: column;
-      box-shadow: -8px 0 40px rgba(0,0,0,.18);
-      transition: right .35s cubic-bezier(.4,0,.2,1);
-    }
-    .cart-drawer.open { right: 0; }
-
-    .cart-head {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--maroon); color: #fff;
-      flex-shrink: 0;
-    }
-    .cart-head h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
-    .cart-head .cart-count-lbl { font-size: .8rem; color: rgba(255,255,255,.7); margin-left: .5rem; }
-    .cart-close {
-      background: rgba(0,0,0,.25); border: none; color: #fff;
-      width: 34px; height: 34px; border-radius: 50%;
-      font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: var(--transition);
-    }
-    .cart-close:hover { background: rgba(255,255,255,.3); }
-
-    .cart-body {
-      flex: 1; overflow-y: auto; padding: 1rem 1.5rem;
-    }
-    .cart-empty {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      height: 100%; text-align: center; color: var(--text3); padding: 2rem;
-    }
-    .cart-empty .empty-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-    .cart-empty p { font-size: .95rem; line-height: 1.6; }
-
-    .cart-item {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: 1rem 0; border-bottom: 1px solid var(--border);
-    }
-    .cart-item:last-child { border-bottom: none; }
-    .cart-item-emoji {
-      width: 52px; height: 52px; border-radius: var(--r);
-      background: var(--cream2); display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; flex-shrink: 0; border: 1px solid var(--border);
-    }
-    .cart-item-info { flex: 1; min-width: 0; }
-    .cart-item-cat  { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-    .cart-item-name { font-size: .88rem; font-weight: 600; color: var(--text); line-height: 1.3; margin-top: .1rem; }
-    .cart-item-price { font-size: .9rem; font-weight: 700; color: var(--maroon); margin-top: .25rem; }
-
-    .cart-qty {
-      display: flex; align-items: center; gap: .5rem; margin-top: .5rem;
-    }
-    .qty-btn {
-      width: 26px; height: 26px; border-radius: 50%;
-      border: 1.5px solid var(--border); background: var(--white);
-      color: var(--maroon); font-size: 1rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: var(--transition); line-height: 1;
-    }
-    .qty-btn:hover { background: var(--maroon); color: #fff; border-color: var(--maroon); }
-    .qty-val { font-size: .9rem; font-weight: 700; color: var(--text); min-width: 20px; text-align: center; }
-
-    .cart-item-remove {
-      background: none; border: none; color: #ccc; font-size: 1rem;
-      cursor: pointer; padding: .2rem; transition: var(--transition); flex-shrink: 0;
-    }
-    .cart-item-remove:hover { color: #c62828; }
-
-    .cart-foot {
-      border-top: 2px solid var(--border);
-      padding: 1.2rem 1.5rem 1.5rem;
-      flex-shrink: 0; background: var(--cream);
-    }
-    .cart-subtotal {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: .9rem; color: var(--text2); margin-bottom: .4rem;
-    }
-    .cart-total-row {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 1.2rem;
-    }
-    .cart-total-row .lbl { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--maroon); }
-    .cart-total-row .amt { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--maroon); }
-
-    .finish-btn {
-      width: 100%; background: var(--maroon); color: #fff;
-      border: none; padding: 1rem;
-      font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700;
-      letter-spacing: .05em; border-radius: var(--r); cursor: pointer;
-      transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: .5rem;
-    }
-    .finish-btn:hover { background: var(--maroon2); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-
-    /* ════════════════════════════
-       ORDER CONFIRMATION MODAL
-    ════════════════════════════ */
-    .order-modal {
-      position: fixed; inset: 0; z-index: 3100;
-      display: flex; align-items: center; justify-content: center;
-      padding: 1rem;
-      background: rgba(0,0,0,.65);
-      opacity: 0; pointer-events: none; transition: opacity .3s;
-    }
-    .order-modal.show { opacity: 1; pointer-events: all; }
-
-    .order-box {
-      background: var(--white); border-radius: 12px;
-      width: min(500px, 95vw); max-height: 90vh; overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-      transform: scale(.92); transition: transform .3s;
-    }
-    .order-modal.show .order-box { transform: scale(1); }
-
-    .order-header {
-      background: var(--maroon); color: #fff;
-      padding: 1.8rem 2rem 1.4rem;
-      text-align: center; border-radius: 12px 12px 0 0;
-      position: relative;
-    }
-    .order-success-icon { font-size: 2.8rem; margin-bottom: .5rem; }
-    .order-header h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
-    .order-header p  { font-size: .85rem; color: rgba(255,255,255,.75); margin-top: .3rem; }
-
-    .order-id-box {
-      margin: 1.5rem 2rem;
-      background: var(--cream2); border: 2px dashed var(--gold);
-      border-radius: var(--r); padding: 1rem 1.5rem;
-      text-align: center;
-    }
-    .order-id-box .lbl { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); }
-    .order-id-box .id  { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--maroon); letter-spacing: .06em; margin-top: .2rem; }
-    .order-id-box .copy-btn {
-      margin-top: .5rem; background: none; border: 1px solid var(--gold);
-      color: var(--gold); font-size: .75rem; font-weight: 600; letter-spacing: .08em;
-      padding: .25rem .8rem; border-radius: 3px; cursor: pointer;
-      transition: var(--transition);
-    }
-    .order-id-box .copy-btn:hover { background: var(--gold); color: var(--dark); }
-
-    .order-items-list { padding: 0 2rem; }
-    .order-items-list h4 { font-family: 'Playfair Display', serif; font-size: .95rem; font-weight: 700; color: var(--maroon); margin-bottom: .8rem; }
-    .order-line {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      font-size: .86rem; padding: .5rem 0; border-bottom: 1px solid var(--border);
-      gap: .5rem;
-    }
-    .order-line:last-child { border-bottom: none; }
-    .order-line .oname { color: var(--text); flex: 1; line-height: 1.35; }
-    .order-line .oqty  { color: var(--text3); font-size: .78rem; }
-    .order-line .oprice { font-weight: 700; color: var(--maroon); white-space: nowrap; }
-
-    .order-total-bar {
-      margin: 1rem 2rem;
-      background: var(--maroon); color: #fff;
-      border-radius: var(--r); padding: .9rem 1.2rem;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .order-total-bar .tl { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; }
-    .order-total-bar .ta { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; }
-
-    .order-actions { padding: 1rem 2rem 2rem; display: flex; flex-direction: column; gap: .8rem; }
-    .wa-order-btn {
-      width: 100%; background: #25d366; color: #003d1a;
-      border: none; padding: 1rem;
-      font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700;
-      border-radius: var(--r); cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: .6rem;
-      transition: var(--transition);
-    }
-    .wa-order-btn:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.4); }
-    .order-cancel-btn {
-      width: 100%; background: none; color: var(--text3);
-      border: 1px solid var(--border); padding: .7rem;
-      font-size: .88rem; border-radius: var(--r); cursor: pointer;
-      transition: var(--transition);
-    }
-    .order-cancel-btn:hover { border-color: var(--maroon); color: var(--maroon); }
-
-    /* "Added!" flash animation on cart badge */
-    @keyframes badgePop { 0%{transform:scale(1)} 50%{transform:scale(1.6)} 100%{transform:scale(1)} }
-    .badge.pop { animation: badgePop .35s ease; }
-
-    /* Toast notification */
-    .toast {
-      position: fixed; bottom: 5.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
-      background: var(--maroon); color: #fff;
-      padding: .65rem 1.4rem; border-radius: 40px;
-      font-size: .85rem; font-weight: 600; letter-spacing: .03em;
-      box-shadow: var(--shadow-md); z-index: 5000;
-      opacity: 0; transition: opacity .3s ease, transform .3s ease;
-      white-space: nowrap; max-width: 90vw; overflow: hidden; text-overflow: ellipsis;
-      pointer-events: none;
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  </style>
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
@@ -1034,13 +45,15 @@
   </ul>
 
   <div class="nav-icons" id="navIcons">
-    <button class="nav-icon-btn" onclick="toggleSearch()" title="Search">🔍</button>
-    <button class="nav-icon-btn" title="Wishlist">
-      🤍
-      <span class="badge">0</span>
+    <button class="nav-icon-btn" onclick="toggleSearch()" title="Search" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+    </button>
+    <button class="nav-icon-btn" onclick="openWishlist()" title="Wishlist" aria-label="Open wishlist">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="badge" id="wishlistBadge">0</span>
     </button>
     <button class="nav-icon-btn" title="Cart" onclick="openCart()" aria-label="Open cart">
-      🛒
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span class="badge" id="cartBadge">0</span>
     </button>
   </div>
@@ -1051,7 +64,7 @@
 </nav>
 
 <!-- MOBILE NAV -->
-<button class="overlay-bg" id="overlayBg" onclick="closeMobileNav()" onkeydown="if(event.key==='Enter'||event.key===' ')closeMobileNav()" aria-label="Close menu"></button>
+<button class="overlay-bg" id="overlayBg" onclick="closeMobileNav();closeCart();closeWishlist();" onkeydown="if(event.key==='Enter'||event.key===' '){closeMobileNav();closeCart();closeWishlist();}" aria-label="Close menu"></button>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
   <ul>
@@ -1075,8 +88,8 @@
     <h3 id="searchHeading">Search Sarees</h3>
     <div class="search-input-wrap">
       <label for="searchInput" class="sr-only">Search for sarees</label>
-      <input type="text" placeholder="e.g. Kanchipuram silk, green saree…" id="searchInput" />
-      <button aria-label="Submit search">🔍</button>
+      <input type="text" placeholder="e.g. silk, uniform, diwali…" id="searchInput" onkeydown="if(event.key==='Enter')doSearch()" />
+      <button aria-label="Submit search" onclick="doSearch()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg></button>
     </div>
   </dialog>
 </div>
@@ -1096,7 +109,7 @@
   </div>
   <div class="hero-right">
     <img
-      src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=900&q=85"
+      src="https://images.unsplash.com/photo-1727430228383-aa1fb59db8bf?w=900&q=85"
       alt="Woman in beautiful saree"
       loading="eager"
     />
@@ -1160,8 +173,8 @@
         <span class="diwali-feat-off">34% OFF</span>
       </div>
       <div class="diwali-feat-btns">
-        <button class="btn-fill" onclick="addToCart('gini-tissue','Gini Tissue Saree',599,'Diwali Offer','🪔')">🛒 Add to Cart</button>
-        <a class="btn-wa" href="https://wa.me/917993632148?text=Hi%20KVB%20Sarees!%20I%20want%20to%20order%20the%20Gini%20Tissue%20Saree%20(Diwali%20Offer)%20at%20%E2%82%B9599.%20Please%20confirm%20availability." target="_blank">💬 Order on WhatsApp</a>
+        <button class="btn-fill" onclick="addToCart('gini-tissue','Gini Tissue Saree',599,'Diwali Offer','🪔')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</button>
+        <a class="btn-wa" href="https://wa.me/917338781288?text=Hi%20KVB%20Sarees!%20I%20want%20to%20order%20the%20Gini%20Tissue%20Saree%20(Diwali%20Offer)%20at%20%E2%82%B9599.%20Please%20confirm%20availability." target="_blank">💬 Order on WhatsApp</a>
       </div>
     </div>
   </div>
@@ -1242,7 +255,7 @@
 
     <div class="prod-card reveal reveal-delay-1">
       <div class="prod-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600091166971-7f9faad6c8d0?w=600&q=80" alt="KVB Soft Silk Saree" loading="lazy"/>
+        <img src="https://images.unsplash.com/photo-1641699862936-be9f49b1c38d?w=600&q=80" alt="KVB Soft Silk Saree" loading="lazy"/>
         <button class="heart-btn" onclick="toggleHeart(this)">♡</button>
         <div class="prod-badge new">NEW</div>
       </div>
@@ -1258,7 +271,7 @@
 
     <div class="prod-card reveal reveal-delay-2">
       <div class="prod-img-wrap">
-        <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80" alt="KVB Pure Silk Saree" loading="lazy"/>
+        <img src="https://images.unsplash.com/photo-1745482036066-5d215ed6b910?w=600&q=80" alt="KVB Pure Silk Saree" loading="lazy"/>
         <button class="heart-btn" onclick="toggleHeart(this)">♡</button>
         <div class="prod-badge">BESTSELLER</div>
       </div>
@@ -1290,7 +303,7 @@
 
     <div class="prod-card reveal reveal-delay-4">
       <div class="prod-img-wrap">
-        <img src="https://images.unsplash.com/photo-1597983073493-88cd0ee0e77e?w=600&q=80" alt="KVB Designer Saree" loading="lazy"/>
+        <img src="https://images.unsplash.com/photo-1745482039058-92017fb981cf?w=600&q=80" alt="KVB Designer Saree" loading="lazy"/>
         <button class="heart-btn" onclick="toggleHeart(this)">♡</button>
         <div class="prod-badge">HOT</div>
       </div>
@@ -1324,7 +337,7 @@
       <div class="amt">₹699</div>
       <div class="from" style="margin-top:.2rem">per piece</div>
     </div>
-    <a href="https://wa.me/917993632148?text=Hello!%20I%20am%20interested%20in%20Uniform%20Sarees.%20Please%20share%20bulk%20order%20details." class="btn-fill" style="background:#fff;color:var(--maroon);border-color:#fff" target="_blank" rel="noopener">
+    <a href="https://wa.me/917338781288?text=Hello!%20I%20am%20interested%20in%20Uniform%20Sarees.%20Please%20share%20bulk%20order%20details." class="btn-fill" style="background:#fff;color:var(--maroon);border-color:#fff" target="_blank" rel="noopener">
       Enquire Bulk Order <span class="arrow">→</span>
     </a>
   </div>
@@ -1404,13 +417,13 @@
     <div class="offer-icon">📍</div>
     <div>
       <h3>Visit KVB Sarees</h3>
-      <p>Come and explore our latest collection at our store in Nagari, Telangana.</p>
+      <p>Come and explore our latest collection at our store in Tirumangalam, Tamil Nadu.</p>
     </div>
   </div>
   <div class="offer-divider"></div>
   <div class="offer-right">
     <div>
-      <a href="https://wa.me/917993632148?text=Hello%20KVB%20Sarees!%20I'm%20interested%20in%20your%20collection." class="wa-btn" target="_blank" rel="noopener">
+      <a href="https://wa.me/917338781288?text=Hello%20KVB%20Sarees!%20I'm%20interested%20in%20your%20collection." class="wa-btn" target="_blank" rel="noopener">
         <span class="wa-icon">💬</span> WhatsApp Us →
       </a>
       <p style="margin-top:.5rem">Get quick assistance on our collections.</p>
@@ -1481,9 +494,9 @@
       </div>
       <p>Tradition. Style. For Every You.<br/>Your trusted destination for premium Indian sarees since 2010.</p>
       <div class="social-row">
-        <a href="#" class="soc-btn" title="Instagram">📸</a>
+        <a href="https://www.instagram.com/kvb_sarees" class="soc-btn insta" title="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.613.074-3.067.418-4.205 1.557C1.709 2.768 1.365 4.222 1.291 5.835 1.233 7.115 1.219 7.523 1.219 12c0 4.477.014 4.885.072 6.165.074 1.613.418 3.067 1.557 4.205 1.138 1.139 2.592 1.483 4.205 1.557C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.613-.074 3.067-.418 4.205-1.557 1.139-1.138 1.483-2.592 1.557-4.205.058-1.28.072-1.688.072-6.165 0-4.477-.014-4.885-.072-6.165-.074-1.613-.418-3.067-1.557-4.205C19.014.49 17.56.146 15.947.072 14.667.014 14.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
         <a href="#" class="soc-btn" title="Facebook">👍</a>
-        <a href="https://wa.me/917993632148" class="soc-btn" title="WhatsApp" target="_blank" rel="noopener">💬</a>
+        <a href="https://wa.me/917338781288" class="soc-btn" title="WhatsApp" target="_blank" rel="noopener">💬</a>
         <a href="#" class="soc-btn" title="YouTube">▶</a>
       </div>
     </div>
@@ -1507,14 +520,7 @@
         <span class="ci">📞</span>
         <div class="cd">
           <strong>Phone</strong>
-          +91 79936 32148<br/>+91 90306 56522
-        </div>
-      </div>
-      <div class="contact-item">
-        <span class="ci">📧</span>
-        <div class="cd">
-          <strong>Email</strong>
-          info@kvbsarees.in
+          +91 73387 81288
         </div>
       </div>
     </div>
@@ -1526,7 +532,7 @@
         <span class="ci">📍</span>
         <div class="cd">
           <strong>Address</strong>
-          123, Main Road,<br/>Nagari, Telangana – 517 590
+          201 GH Road,<br/>Near Nataraja Super Market,<br/>Landmark: Arya Hospital,<br/><span style="white-space:nowrap">Tirumangalam, Tamil Nadu – 625&nbsp;706</span>
         </div>
       </div>
       <div class="contact-item">
@@ -1551,9 +557,17 @@
 <!-- WhatsApp Floating Button -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<a href="https://wa.me/917993632148?text=Hello%20KVB%20Sarees!%20I'm%20interested%20in%20your%20saree%20collection." class="wa-float" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
+<a href="https://wa.me/917338781288?text=Hello%20KVB%20Sarees!%20I'm%20interested%20in%20your%20saree%20collection." class="wa-float" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
 
 <!-- ══════════ CART DRAWER ══════════ -->
+<aside class="cart-drawer" id="wishlistDrawer" aria-label="Wishlist" style="z-index:2200">
+  <div class="cart-head">
+    <h3>My Wishlist</h3>
+    <button class="cart-close" onclick="closeWishlist()" aria-label="Close wishlist">✕</button>
+  </div>
+  <div class="cart-body" id="wishlistBody"></div>
+</aside>
+
 <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
   <div class="cart-head">
     <div>
@@ -1563,7 +577,7 @@
   </div>
   <div class="cart-body" id="cartBody">
     <div class="cart-empty">
-      <div class="empty-icon">🛒</div>
+      <div class="empty-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
       <p>Your cart is empty.<br/>Add sarees to get started!</p>
     </div>
   </div>
@@ -1613,240 +627,6 @@
 </div>
 
 <!-- ══════════ SCRIPTS ══════════ -->
-<script>
-  /* ════════════════════════════
-     CART STATE
-  ════════════════════════════ */
-  let cart = [];       // [{id, name, price, category, emoji, qty}]
-  let currentOrderId  = '';
-
-  const OWNER_WA = '917993632148';
-
-  /* ── Add to cart ── */
-  function addToCart(id, name, price, category, emoji) {
-    emoji = emoji || '🥻';
-    const existing = cart.find(i => i.id === id);
-    if (existing) {
-      existing.qty++;
-    } else {
-      cart.push({ id, name, price, category, emoji, qty: 1 });
-    }
-    renderCart();
-    flashBadge();
-    showToast(name);
-  }
-
-  /* ── Update quantity ── */
-  function updateQty(id, delta) {
-    const item = cart.find(i => i.id === id);
-    if (!item) return;
-    item.qty += delta;
-    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-    renderCart();
-  }
-
-  /* ── Remove item ── */
-  function removeFromCart(id) {
-    cart = cart.filter(i => i.id !== id);
-    renderCart();
-  }
-
-  /* ── Render cart ── */
-  function renderCart() {
-    const body  = document.getElementById('cartBody');
-    const foot  = document.getElementById('cartFoot');
-    const badge = document.getElementById('cartBadge');
-    const countLbl = document.getElementById('cartCountLbl');
-
-    const totalQty   = cart.reduce((s, i) => s + i.qty, 0);
-    const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
-
-    /* update badge */
-    badge.textContent = totalQty > 0 ? totalQty : '0';
-    countLbl.textContent = totalQty > 0 ? `(${totalQty} item${totalQty > 1 ? 's' : ''})` : '';
-    document.getElementById('cartItemCount').textContent = totalQty;
-    document.getElementById('cartSubtotal').textContent  = '₹' + totalPrice.toLocaleString('en-IN');
-    document.getElementById('cartTotal').textContent      = '₹' + totalPrice.toLocaleString('en-IN');
-
-    if (cart.length === 0) {
-      body.innerHTML = `<div class="cart-empty"><div class="empty-icon">🛒</div><p>Your cart is empty.<br/>Add sarees to get started!</p></div>`;
-      foot.style.display = 'none';
-      return;
-    }
-
-    foot.style.display = 'block';
-    body.innerHTML = cart.map(item => `
-      <div class="cart-item">
-        <div class="cart-item-emoji">${item.emoji}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-cat">${item.category}</div>
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
-          <div class="cart-qty">
-            <button class="qty-btn" onclick="updateQty('${item.id}', -1)" aria-label="Decrease quantity">−</button>
-            <span class="qty-val">${item.qty}</span>
-            <button class="qty-btn" onclick="updateQty('${item.id}', 1)" aria-label="Increase quantity">+</button>
-            <span style="font-size:.75rem;color:var(--text3);margin-left:.3rem">× ₹${item.price.toLocaleString('en-IN')}</span>
-          </div>
-        </div>
-        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" aria-label="Remove item">✕</button>
-      </div>
-    `).join('');
-  }
-
-  /* ── Open / close cart ── */
-  function openCart() {
-    document.getElementById('cartDrawer').classList.add('open');
-    document.getElementById('overlayBg').classList.add('show');
-  }
-  function closeCart() {
-    document.getElementById('cartDrawer').classList.remove('open');
-    document.getElementById('overlayBg').classList.remove('show');
-  }
-
-  /* ── Toast ── */
-  let toastTimer;
-  function showToast(name) {
-    const t = document.getElementById('toast');
-    const short = name.length > 40 ? name.slice(0, 38) + '…' : name;
-    t.textContent = '✓ Added to cart: ' + short;
-    t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
-  }
-
-  /* ── Badge pop animation ── */
-  function flashBadge() {
-    const b = document.getElementById('cartBadge');
-    b.classList.remove('pop');
-    void b.offsetWidth;
-    b.classList.add('pop');
-  }
-
-  /* ════════════════════════════
-     ORDER FLOW
-  ════════════════════════════ */
-  function generateOrderId() {
-    const d = new Date();
-    const date = d.getFullYear().toString().slice(2)
-      + String(d.getMonth()+1).padStart(2,'0')
-      + String(d.getDate()).padStart(2,'0');
-    const rand = Math.floor(Math.random() * 9000) + 1000;
-    return `KVB-${date}-${rand}`;
-  }
-
-  function placeOrder() {
-    if (cart.length === 0) return;
-    currentOrderId = generateOrderId();
-    const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
-
-    document.getElementById('orderIdDisplay').textContent = currentOrderId;
-    document.getElementById('orderTotalDisplay').textContent = '₹' + total.toLocaleString('en-IN');
-
-    const lines = cart.map((item, idx) => `
-      <div class="order-line">
-        <div class="oname">${idx+1}. ${item.name}<br/><span class="oqty">${item.category} × ${item.qty}</span></div>
-        <div class="oprice">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
-      </div>
-    `).join('');
-    document.getElementById('orderSummaryLines').innerHTML = lines;
-
-    closeCart();
-    document.getElementById('orderModal').classList.add('show');
-  }
-
-  function closeOrderModal() {
-    document.getElementById('orderModal').classList.remove('show');
-    openCart();
-  }
-
-  function copyOrderId() {
-    navigator.clipboard.writeText(currentOrderId).then(() => {
-      const btn = document.querySelector('.copy-btn');
-      btn.textContent = '✅ Copied!';
-      setTimeout(() => btn.textContent = '📋 Copy ID', 2000);
-    });
-  }
-
-  /* ── Build & send WhatsApp message ── */
-  function sendOrderWhatsApp() {
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-    const timeStr = now.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
-    const total   = cart.reduce((s,i) => s + i.price * i.qty, 0);
-
-    let itemLines = cart.map((item, idx) =>
-      `  ${idx+1}. ${item.name} (${item.category}) × ${item.qty}  —  ₹${(item.price * item.qty).toLocaleString('en-IN')}`
-    ).join('\n');
-
-    const msg =
-`🛍️ *New Order — KVB Sarees*
-
-📋 *Order ID:* ${currentOrderId}
-📅 *Date:* ${dateStr}, ${timeStr}
-
-*Items Ordered:*
-${itemLines}
-
-💰 *Total Amount: ₹${total.toLocaleString('en-IN')}*
-
-Please confirm my order. Thank you! 🙏`;
-
-    const url = `https://wa.me/${OWNER_WA}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank', 'noopener');
-  }
-
-  /* ════════════════════════════
-     MISC
-  ════════════════════════════ */
-  /* ── Scroll reveal ── */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  /* ── Mobile nav ── */
-  function toggleMobileNav() {
-    document.getElementById('mobileNav').classList.toggle('open');
-    document.getElementById('overlayBg').classList.toggle('show');
-  }
-  function closeMobileNav() {
-    document.getElementById('mobileNav').classList.remove('open');
-    document.getElementById('overlayBg').classList.remove('show');
-    document.getElementById('cartDrawer').classList.remove('open');
-  }
-
-  /* ── Search ── */
-  function toggleSearch() {
-    const ov = document.getElementById('searchOverlay');
-    ov.classList.toggle('show');
-    if (ov.classList.contains('show')) setTimeout(() => document.getElementById('searchInput').focus(), 200);
-  }
-  function closeSearchOnBg() { toggleSearch(); }
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { toggleSearch(); closeMobileNav(); closeCart(); }
-  });
-
-  /* ── Wishlist heart ── */
-  function toggleHeart(btn) {
-    const liked = btn.classList.toggle('liked');
-    btn.textContent = liked ? '♥' : '♡';
-  }
-
-  /* ── Active nav on scroll ── */
-  const sections = ['home','categories','featured','contact'];
-  window.addEventListener('scroll', () => {
-    const pos = window.scrollY + 100;
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const link = document.querySelector(`.nav-menu a[href="#${id}"]`);
-      if (link) link.classList.toggle('active', pos >= el.offsetTop && pos < el.offsetTop + el.offsetHeight);
-    });
-  });
-
-  /* init cart badge */
-  renderCart();
-</script>
+<script src="js/index.js"></script>
 </body>
 </html>
